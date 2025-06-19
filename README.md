@@ -17,7 +17,7 @@ forestfire_detection/
 ## 📦 Setup Instructions
 
 # Clone and move into folder
-git clone https://github.com/your-username/fire-detection-tinyml.git
+git clone https://github.com/Aashish-gt/fire-detection-tinyml.git
 cd fire-detection-tinyml
 
 # Create virtual environment (optional)
