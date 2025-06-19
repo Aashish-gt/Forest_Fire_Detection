@@ -5,13 +5,8 @@ This project trains a lightweight fire detection model using TensorFlow and conv
 
 ## 📁 Folder Structure
 
-forestfire_detection/
-├── dataset/
-│ ├── fire/
-│ └── nofire/
-├── preprocessing.ipynb
-├── training.ipynb
-├── requirements.txt
+![image](https://github.com/user-attachments/assets/d58c7513-7a67-4fb4-953c-32788c47e5e7)
+
 
 
 ## 📦 Setup Instructions
