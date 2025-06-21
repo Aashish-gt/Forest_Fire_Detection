@@ -1,23 +1,30 @@
-# Forest_Fire_Detection
-# 🔥 Fire Detection Using TinyML
+# 🌲 Forest Fire Detection System (Backend)
 
-This project trains a lightweight fire detection model using TensorFlow and converts it to a TFLite model suitable for embedded devices like ESP32-CAM.
+This Node.js backend receives sensor data from an ESP32 running a TinyML fire detection model, stores it in Firebase Firestore, and alerts the admin when fire is detected. Admins can also view historical data via API or dashboard.
 
-## 📁 Folder Structure
+---
 
-![image](https://github.com/user-attachments/assets/d58c7513-7a67-4fb4-953c-32788c47e5e7)
+## 🔧 Tech Stack
 
+- Node.js + Express
+- Firebase Admin SDK (Firestore)
+- ESP32 (sensor data sender)
 
+---
 
-## 📦 Setup Instructions
+## 🚀 Features
 
-# Clone and move into folder
-git clone https://github.com/Aashish-gt/fire-detection-tinyml.git
-cd fire-detection-tinyml
+- ✅ Receives fire-related sensor data from ESP32
+- ✅ Stores data in Firebase Firestore
+- ✅ Triggers alert when fire is detected
+- ✅ Admin login system 
+- ✅ View historical data 
 
-# Create virtual environment (optional)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+---
 
-# Install dependencies
-pip install -r requirements.txt
+## 📦 Installation
+
+```bash
+git clone https://github.com/Aashish-gt/Forest_Fire_Detection.git
+cd forest-fire-backend
+

@@ -3,7 +3,7 @@ const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://console.firebase.google.com/project/esp32-firedetection/database"
+  // databaseURL: "https://console.firebase.google.com/project/esp32-firedetection/database"
 });
 
 const db = admin.firestore();

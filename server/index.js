@@ -2,7 +2,7 @@ const express = require ('express');
 const morgan = require('morgan');
 const admin = require('./routes/authRoute')
 const dashboard = require('./routes/dashboardRoute')
-// const sensor = require('./routes/sensorRoute')
+const sensor = require('./routes/sensorRoute')
 require('dotenv').config();
 
 const app = express();
@@ -15,7 +15,7 @@ app.use(morgan('dev'))
 //Route Setup
 app.use('/api/admin', admin)
 app.use('/api/dashboard', dashboard )
-// app.use('/api/sensors', sensor)
+app.use('/api/sensors', sensor)
 
 const port = process.env.PORT || 8080
 
