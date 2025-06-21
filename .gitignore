@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .env
 
 .serviceAccountKey.json
@@ -31,3 +32,6 @@ frontend/.env
 /frontend/.vscode/
 
 
+=======
+myenv/
+>>>>>>> ed8b1ce (tinyml added)
