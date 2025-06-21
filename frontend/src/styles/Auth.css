@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orbitron:wght@400..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../assets/forest.png") no-repeat center center fixed; */
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  max-width: 400px;
+  width: 90%;
+  /* border: 2px solid red; */
+}
+
+.form-container h1.logo {
+  font-size: 28px;
+  font-family: "Orbitron", sans-serif;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-container h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
+}
+
+form input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 100px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f1f1f1;
+}
+
+form .button {
+  width: 100%;
+  padding: 12px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  /* font-weight: 600; */
+  font-family: "Open Sans", sans-serif;
+}
+
+.message {
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+}
+
+.message a {
+  color: #ffccbc;
+  text-decoration: none;
+}
+
+.input-group {
+  position: relative;
+  margin: 12px auto;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 14px;
+}
+
+.input-group input {
+  padding-left: 40px;
+}
