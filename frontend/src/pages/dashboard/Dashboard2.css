@@ -85,18 +85,6 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-/* .sensor-card.red {
-  background-color: #ffe5e5;
-}
-
-.sensor-card.green {
-  background-color: #e6ffe6;
-}
-
-.sensor-card.gray {
-  background-color: #f0f0f0;
-} */
-
 .sensor-card h4 {
   text-align: center;
   color: #006400;
@@ -113,6 +101,50 @@
 .chart-placeholder .bar {
   width: 10px;
   background-color: #333;
+}
+.sidebar svg {
+  margin-right: 8px;
+}
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #003d1f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  gap: 1.2rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar .sidebar-link {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.sidebar .sidebar-link:hover {
+  background-color: #006400;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
 }
 
 /* Responsive */
