@@ -35,3 +35,7 @@ frontend/.env
 =======
 myenv/
 >>>>>>> ed8b1ce (tinyml added)
+/Dataset/processed_data/X_train.npy
+/Dataset/processed_data/X_val.npy
+/Dataset/processed_data/y_train.npy
+/Dataset/processed_data/y_val.npy
