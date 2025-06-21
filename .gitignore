@@ -2,3 +2,32 @@
 
 .serviceAccountKey.json
 node_modules
+
+frontend/node_modules
+frontend/dist
+frontend/.env
+
+# Ignore frontend node_modules
+/frontend/node_modules/
+
+# Ignore frontend .env files
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.development
+/frontend/.env.production
+/frontend/.env.test
+
+# Ignore build folder if using Vite/React/etc.
+/frontend/dist/
+/frontend/build/
+
+# Ignore log files
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# Optional: Ignore IDE/editor files
+/frontend/.DS_Store
+/frontend/.vscode/
+
+
