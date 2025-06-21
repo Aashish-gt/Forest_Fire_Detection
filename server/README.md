@@ -25,6 +25,6 @@ This Node.js backend receives sensor data from an ESP32 running a TinyML fire de
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/forest-fire-backend.git
+git clone https://github.com/Aashish-gt/Forest_Fire_Detection.git
 cd forest-fire-backend
 
