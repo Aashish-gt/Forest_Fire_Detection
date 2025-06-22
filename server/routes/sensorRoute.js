@@ -6,6 +6,6 @@ router.post('/receive', receiveData)
 
 router.get('/data', getData)
 
-router.post('/')
+// router.post('/mail', )
 
 module.exports = router
