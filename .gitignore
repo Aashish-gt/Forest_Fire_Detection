@@ -45,4 +45,4 @@ frontend/.env
 /server/package-lock.json
 
 # Ignore keys
-/server/serviceAccountKey
+/server/serviceAccountKey.json
