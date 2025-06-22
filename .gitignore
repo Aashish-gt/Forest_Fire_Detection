@@ -33,4 +33,16 @@ frontend/.env
 /frontend/.DS_Store
 /frontend/.vscode/
 
+# Ignore server node_modules
+/server/node_modules/
 
+# Ignore server .env files
+/server/.env
+/server/*.log
+/server/npm-debug.log*
+/server/yarn-debug.log*
+/server/yarn-error.log*
+/server/package-lock.json
+
+# Ignore keys
+/server/serviceAccountKey
