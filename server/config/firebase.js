@@ -3,10 +3,12 @@ const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  // databaseURL: "https://console.firebase.google.com/project/esp32-firedetection/database"
+  databaseURL: "https://esp32-firedetection-default-rtdb.firebaseio.com"
+
 });
 
 const db = admin.firestore();
 const auth = admin.auth();
+const messaging = admin.messaging();
 
-module.exports = { admin, db, auth };
+module.exports = { admin, db, auth, messaging,};

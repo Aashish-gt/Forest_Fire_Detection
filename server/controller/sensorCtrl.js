@@ -1,23 +1,28 @@
-// /controllers/dataController.js
-const { db } = require('../config/firebase');
+const { db, messaging, admin } = require('../config/firebase');
 
 const receiveData = async (req, res) => {
-    try {
-        const data = req.body;
-        data.timestamp = new Date().toISOString();
+  const data = {
+    temperature: req.body.temperature,
+    humidity: req.body.humidity,
+    smoke: req.body.smoke,
+    fireDetected: req.body.fireDetected,
+    timestamp: new Date().toISOString()
+  };
 
-        await db.collection('fire_readings').add(data);
+  await db.collection('fire_readings').add(data);
 
-        res.status(200).json({
-            success: true,
-            message: 'Data received.'
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
-    }
+  if (data.fireDetected) {
+    const tokens = await db.collection('admin_tokens').get();
+    tokens.forEach(async doc => {
+      const token = doc.data().token;
+      await require('firebase-admin').messaging().send({
+        notification: { title: '🔥 Fire Alert', body: `Temp: ${data.temperature}°C, Smoke: ${data.smoke}` },
+        token
+      });
+    });
+  }
+
+  res.json({ success: true, message: 'Data received' });
 };
 
 const getData = async (req, res) => {
