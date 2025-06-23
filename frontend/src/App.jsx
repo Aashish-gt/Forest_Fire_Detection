@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useEffect } from "react";
+import { onMessageListener,messaging } from "../services/firebase";
 import "./App.css";
 import LandingPage from "./pages/landing/LandingPage";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -8,6 +10,16 @@ import Login from "./pages/auth/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+
+    useEffect(() => {
+    const unsubscribe = onMessageListener()
+    console.log('unsubscribe: ', unsubscribe)
+
+    return () => {
+      unsubscribe()
+    };
+  }, [messaging]);
+
   return (
     <Router>
       <Routes>

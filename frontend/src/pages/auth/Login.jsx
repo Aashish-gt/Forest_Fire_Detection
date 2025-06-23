@@ -6,9 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Firebase auth imports
-import { auth } from "../../../services/firebase"; // adjust path as needed
 import { signInWithCustomToken } from "firebase/auth";
-import { requestNotificationPermission} from "../../../services/messaging"
+import { auth, getFCMToken, requestPermission } from "../../../services/firebase"; 
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,7 +40,10 @@ const Login = () => {
       localStorage.setItem("token", idToken);
       console.log("ID Token saved to localStorage");
 
-      const fcmToken = await requestNotificationPermission();
+      requestPermission();
+      const fcmToken = await getFCMToken();
+
+      console.log('FCM token: ', fcmToken);
 
       if (fcmToken) {
         // Step 5: Save FCM token to server (authenticated)
