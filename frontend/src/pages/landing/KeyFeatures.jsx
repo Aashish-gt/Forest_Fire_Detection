@@ -7,7 +7,7 @@ import { BsLightbulb } from "react-icons/bs";
 
 function KeyFeatures() {
   return (
-    <section className="key-features">
+    <section className="key-features" id="features">
       <h2>Key Features</h2>
       <div className="feature-grid">
         <FeaturesCard

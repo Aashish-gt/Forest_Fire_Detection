@@ -7,8 +7,8 @@ import "./Home.css";
 function Home() {
   return (
     <>
-      <section className="hero-container">
-      <Navbar />
+      <section className="hero-container" id="home">
+        <Navbar />
         <div className="hero-content">
           <h1 className="project-title">
             IoT-Based Forest Fire <br /> Detection System
