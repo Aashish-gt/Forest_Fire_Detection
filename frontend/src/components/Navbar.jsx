@@ -23,16 +23,24 @@ function Navbar() {
       <nav>
         <ul className={menuOpen ? "show" : ""}>
           <li>
-            <Link to="/">Home</Link>
+            <a href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </a>
           </li>
           <li>
-            <Link to="/">About</Link>
+            <a href="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </a>
           </li>
           <li>
-            <Link to="/">Features</Link>
+            <a href="#features" onClick={() => setMenuOpen(false)}>
+              Features
+            </a>
           </li>
           <li>
-            <Link to="/">Contact</Link>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </a>
           </li>
           <li>
             <Link to="/login">

@@ -5,13 +5,10 @@ import "../../styles/ContactSection.css";
 
 const ContactSection = () => {
   return (
-    <section className="contact-section">
-      
-        <ContactInfo />
-      
-      
-        <ContactForm />
-     
+    <section className="contact-section" id="contact">
+      <ContactInfo />
+
+      <ContactForm />
     </section>
   );
 };

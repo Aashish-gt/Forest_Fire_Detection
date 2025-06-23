@@ -1,9 +1,6 @@
-// Dashboard.jsx
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { FaUserCircle } from "react-icons/fa";
-
-// ✅ Import default images from assets folder
 import defaultMapImage from "../../assets/map.png";
 import defaultForestImage from "../../assets/dashboard-forest.png";
 
@@ -16,11 +13,10 @@ const Dashboard = () => {
   const [gasData, setGasData] = useState([]);
 
   useEffect(() => {
-    // ✅ Replace with your real API endpoints
     fetch("/api/map-image")
       .then((res) => res.json())
       .then((data) => setMapImage(data.url))
-      .catch(() => setMapImage(defaultMapImage)); // fallback to local image
+      .catch(() => setMapImage(defaultMapImage));
 
     fetch("/api/forest-image")
       .then((res) => res.json())
@@ -76,31 +72,43 @@ const Dashboard = () => {
         </div>
 
         <div className="cards-container">
-          <SensorCard title="Temperature" data={temperatureData} color="red" />
-          <SensorCard title="Humidity" data={humidityData} color="green" />
-          <SensorCard title="Gas" data={gasData} color="gray" />
+          <SensorCard
+            title="Temperature"
+            value={
+              temperatureData.length > 0
+                ? `${temperatureData[temperatureData.length - 1]} °C`
+                : null
+            }
+            color="red"
+          />
+          <SensorCard
+            title="Humidity"
+            value={
+              humidityData.length > 0
+                ? `${humidityData[humidityData.length - 1]} %`
+                : null
+            }
+            color="green"
+          />
+          <SensorCard
+            title="Gas"
+            value={
+              gasData.length > 0 ? `${gasData[gasData.length - 1]} ppm` : null
+            }
+            color="gray"
+          />
         </div>
       </main>
     </div>
   );
 };
 
-const SensorCard = ({ title, data, color }) => {
+const SensorCard = ({ title, value, color }) => {
   return (
     <div className={`sensor-card ${color}`}>
       <h4>{title}</h4>
-      <div className="chart-placeholder">
-        {data.length > 0 ? (
-          data.map((value, index) => (
-            <div
-              key={index}
-              className="bar"
-              style={{ height: `${value / 5}px` }}
-            ></div>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+      <div className="sensor-value">
+        {value !== null ? <p>{value}</p> : <p>Loading...</p>}
       </div>
     </div>
   );
