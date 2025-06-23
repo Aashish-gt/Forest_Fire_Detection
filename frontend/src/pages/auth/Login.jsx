@@ -5,6 +5,11 @@ import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// Firebase auth imports
+import { auth } from "../../../services/firebase"; // adjust path as needed
+import { signInWithCustomToken } from "firebase/auth";
+import { requestNotificationPermission} from "../../../services/messaging"
+
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -15,16 +20,48 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submitted with:", formData);
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/admin/login",
-        formData
-      );
-      alert(res.data.message);
-      // Save token to localStorage or context if needed
-      localStorage.setItem("token", res.data.token);
+      // Step 1: Get Firebase custom token from backend
+      const res = await axios.post("http://localhost:8080/api/admin/login", formData);
+      console.log("Backend responded with:", res.data);
+
+      const customToken = res.data.token;
+      if (!customToken) throw new Error("No custom token received from backend");
+
+      // Step 2: Sign in to Firebase with the custom token
+      const userCredential = await signInWithCustomToken(auth, customToken);
+      console.log("Firebase sign-in successful:", userCredential);
+
+      // Step 3: Get the Firebase ID token
+      const idToken = await userCredential.user.getIdToken();
+      console.log("Received Firebase ID Token:", idToken);
+
+      // Step 4: Save ID token to localStorage
+      localStorage.setItem("token", idToken);
+      console.log("ID Token saved to localStorage");
+
+      const fcmToken = await requestNotificationPermission();
+
+      if (fcmToken) {
+        // Step 5: Save FCM token to server (authenticated)
+        await axios.post(
+          "http://localhost:8080/api/notify/save-token",
+          { token: fcmToken },
+          {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+              "Content-Type": "application/json"
+            }
+          }
+        );
+      }
+
+
+      alert("Login successful");
       navigate("/dashboard");
     } catch (error) {
+      console.error("Login error:", error);
       alert(error.response?.data?.message || "Login failed");
     }
   };

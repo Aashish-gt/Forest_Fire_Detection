@@ -3,7 +3,8 @@ const morgan = require('morgan');
 require('dotenv').config();
 const admin = require('./routes/authRoute')
 const dashboard = require('./routes/dashboardRoute')
-// const sensor = require('./routes/sensorRoute')
+const sensor = require('./routes/sensorRoute')
+const notify = require('./routes/notifyRoute')
 const cors = require('cors');
 
 const app = express();
@@ -17,7 +18,9 @@ app.use(cors());
 //Route Setup
 app.use('/api/admin', admin)
 app.use('/api/dashboard', dashboard)
-// app.use('/api/sensors', sensor)
+app.use('/api/sensors', sensor)
+app.use('/api/notify', notify)
+
 
 const port = process.env.PORT || 8080
 

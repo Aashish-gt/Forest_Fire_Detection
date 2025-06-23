@@ -120,4 +120,50 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = { signUpController, loginController }
+// Register FCM token for notifications
+const registerToken = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    console.log('Request body:', req.body);
+    console.log('User:', req.user);
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: 'FCM token is required'
+      });
+    }
+
+    const userEmail = req.user.email || 'admin@test.com';
+    const userUid = req.user.uid || 'test-uid';
+
+    // Save token to Firestore
+    await db.collection('fcm_tokens').doc(userEmail).set({
+      token,
+      email: userEmail,
+      uid: userUid,
+      updatedAt: new Date().toISOString()
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'FCM token registered successfully',
+      data: {
+        email: userEmail,
+        tokenSaved: true
+      }
+    });
+
+  } catch (error) {
+    console.error('Token registration error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to register token',
+      error: error.message
+    });
+  }
+};
+
+
+module.exports = { signUpController, loginController, registerToken }
