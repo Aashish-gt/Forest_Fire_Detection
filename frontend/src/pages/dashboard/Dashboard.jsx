@@ -1,49 +1,48 @@
-// Dashboard.jsx
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { FaUserCircle } from "react-icons/fa";
-
-// ✅ Import default images from assets folder
 import defaultMapImage from "../../assets/map.png";
 import defaultForestImage from "../../assets/dashboard-forest.png";
 
 const Dashboard = () => {
   const [mapImage, setMapImage] = useState("");
   const [forestImage, setForestImage] = useState("");
-  const [statusText, setStatusText] = useState("");
-  const [temperatureData, setTemperatureData] = useState([]);
-  const [humidityData, setHumidityData] = useState([]);
-  const [gasData, setGasData] = useState([]);
+  const [temperature, setTemperature] = useState(null);
+  const [humidity, setHumidity] = useState(null);
+  const [gas, setGas] = useState(null);
+  const [fireStatus, setFireStatus] = useState("");
 
   useEffect(() => {
-    // ✅ Replace with your real API endpoints
+    // Map image
     fetch("/api/map-image")
       .then((res) => res.json())
       .then((data) => setMapImage(data.url))
-      .catch(() => setMapImage(defaultMapImage)); // fallback to local image
+      .catch(() => setMapImage(defaultMapImage));
 
+    // Forest status image
     fetch("/api/forest-image")
       .then((res) => res.json())
       .then((data) => setForestImage(data.url))
       .catch(() => setForestImage(defaultForestImage));
 
-    fetch("/api/status")
-      .then((res) => res.json())
-      .then((data) => setStatusText(data.status))
-      .catch(() => setStatusText("Status unavailable"));
+    // Sensor data (latest)
+    const fetchSensorData = () => {
+      fetch("http://localhost:8080/api/sensors/latest")
+        .then((res) => res.json())
+        .then((data) => {
+          setTemperature(data.temperature);
+          setHumidity(data.humidity);
+          setGas(data.gas);
+          setFireStatus(data.fireDetected ? "🔥 Fire Detected!" : "✅ Normal");
+        })
+        .catch((err) => {
+          console.error("Failed to fetch sensor data", err);
+        });
+    };
 
-    fetch("/api/sensor-data")
-      .then((res) => res.json())
-      .then((data) => {
-        setTemperatureData(data.temperature);
-        setHumidityData(data.humidity);
-        setGasData(data.gas);
-      })
-      .catch(() => {
-        setTemperatureData([]);
-        setHumidityData([]);
-        setGasData([]);
-      });
+    fetchSensorData();
+    const interval = setInterval(fetchSensorData, 10000); // every 10 sec
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -71,36 +70,38 @@ const Dashboard = () => {
               alt="Forest Status"
               className="status-image"
             />
-            <p>{statusText}</p>
+            <p>{fireStatus || "Status unavailable"}</p>
           </div>
         </div>
 
         <div className="cards-container">
-          <SensorCard title="Temperature" data={temperatureData} color="red" />
-          <SensorCard title="Humidity" data={humidityData} color="green" />
-          <SensorCard title="Gas" data={gasData} color="gray" />
+          <SensorCard
+            title="Temperature"
+            value={temperature !== null ? `${temperature} °C` : "Loading..."}
+            color="red"
+          />
+          <SensorCard
+            title="Humidity"
+            value={humidity !== null ? `${humidity} %` : "Loading..."}
+            color="green"
+          />
+          <SensorCard
+            title="Gas"
+            value={gas !== null ? `${gas} ppm` : "Loading..."}
+            color="gray"
+          />
         </div>
       </main>
     </div>
   );
 };
 
-const SensorCard = ({ title, data, color }) => {
+const SensorCard = ({ title, value, color }) => {
   return (
     <div className={`sensor-card ${color}`}>
       <h4>{title}</h4>
-      <div className="chart-placeholder">
-        {data.length > 0 ? (
-          data.map((value, index) => (
-            <div
-              key={index}
-              className="bar"
-              style={{ height: `${value / 5}px` }}
-            ></div>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+      <div className="sensor-value">
+        <p>{value}</p>
       </div>
     </div>
   );

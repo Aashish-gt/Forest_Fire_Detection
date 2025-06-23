@@ -4,7 +4,7 @@ import aboutImg from "../../assets/about.png";
 
 function About() {
   return (
-    <section className="about-section">
+    <section className="about-section" id="about">
       <div className="about-image">
         <img src={aboutImg} alt="A forest with tall trees." />
       </div>
