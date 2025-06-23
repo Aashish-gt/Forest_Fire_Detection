@@ -1,10 +1,12 @@
-const express = require('express')
-const { receiveData, getData } = require('../controller/sensorCtrl')
-const { verifyToken, verifyTokenSimple } = require('../middlewares/authMiddleware')
-const router = express.Router()
+const express = require('express');
+const { receiveData, getData, getLatestSensorData, getStatus } = require('../controller/sensorCtrl');
 
-router.post('/receive', receiveData)
+const router = express.Router();
 
-router.get('/data', getData)
+router.post('/receive', receiveData);
+router.get('/data', getData);
+// router.get('/sensor-data', getLatestSensorData);
+router.get('/status', getStatus);
+router.get('/latest', getLatestSensorData);
 
-module.exports = router
+module.exports = router;
