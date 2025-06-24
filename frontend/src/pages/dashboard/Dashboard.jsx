@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [humidity, setHumidity] = useState(null);
   const [gas, setGas] = useState(null);
   const [fireStatus, setFireStatus] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     // Map image
@@ -33,7 +34,10 @@ const Dashboard = () => {
           setTemperature(data.temperature);
           setHumidity(data.humidity);
           setGas(data.gas);
-          setFireStatus(data.fireDetected ? "🔥 Fire Detected!" : "✅ Normal");
+
+          const fireDetected = data.fireDetected;
+          setFireStatus(fireDetected ? "🔥 Fire Detected!" : "✅ Normal");
+          setShowPopup(fireDetected);
         })
         .catch((err) => {
           console.error("Failed to fetch sensor data", err);
@@ -47,6 +51,17 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      {/* Popup */}
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>🚨 Fire Detected!</h2>
+            <p>Temperature and smoke levels are above normal.</p>
+            <button onClick={() => setShowPopup(false)}>Close</button>
+          </div>
+        </div>
+      )}
+
       <nav className="navbar">
         <h1 className="logo">FireGuard</h1>
         <FaUserCircle className="user-icon" />
