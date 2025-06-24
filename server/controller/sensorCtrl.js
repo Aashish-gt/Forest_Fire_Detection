@@ -22,7 +22,7 @@ const receiveData = async (req, res) => {
       try {
         await admin.messaging().send({
           notification: {
-            title: '🔥 Fire Alert',
+            title: 'Fire Alert',
             body: `Temp: ${data.temperature}°C, Smoke: ${data.smoke}`,
           },
           token,
